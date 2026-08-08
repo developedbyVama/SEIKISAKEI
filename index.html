@@ -12,13 +12,13 @@
   <!-- Bootstrap 5.3.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <!-- Google Fonts: Assistant & Inter -->
+  <!-- Remix Icon CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+  <!-- Google Fonts: Playfair Display, Assistant & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet">
 
   <style>
@@ -28,6 +28,8 @@
       --brand-primary-hover: #54010e;
       --brand-primary-light: rgba(113, 2, 20, 0.06);
       --brand-primary-border: rgba(113, 2, 20, 0.18);
+      --badge-bg: #F8EBE7;
+      --badge-color: #710214;
       --whatsapp-green: #25D366;
       --whatsapp-dark: #128C7E;
 
@@ -47,6 +49,7 @@
       /* Typography */
       --font-primary: 'Assistant', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --font-heading: 'Assistant', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
     }
 
     @media (max-width: 767.98px) {
@@ -154,6 +157,36 @@
       transform: translateY(-2px);
     }
 
+    /* Button Icon Motion on Hover */
+    .btn-brand-primary i,
+    .btn-brand-outline i,
+    .btn-hero-whatsapp i,
+    .chat-option-btn i {
+      display: inline-block;
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      vertical-align: middle;
+    }
+
+    .btn-brand-primary:hover i:not(.btn-arrow-icon),
+    .btn-hero-whatsapp:hover i:not(.btn-arrow-icon) {
+      transform: scale(1.22) rotate(-8deg);
+    }
+
+    .btn-arrow-icon {
+      display: inline-block;
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      will-change: transform;
+    }
+
+    .btn-brand-primary:hover .btn-arrow-icon,
+    .btn-hero-whatsapp:hover .btn-arrow-icon {
+      transform: translateX(6px);
+    }
+
+    .btn-brand-outline:hover .btn-arrow-icon {
+      transform: translateY(4px);
+    }
+
     /* Header & Navigation */
     .site-header {
       background-color: rgba(255, 255, 255, 0.95);
@@ -178,7 +211,7 @@
     .feature-card {
       background: var(--color-surface-card);
       border: 1px solid var(--color-border);
-      border-radius: 0px;
+      border-radius: 7px;
       padding: 2.25rem 2rem;
       height: 100%;
       transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -210,7 +243,7 @@
     .feature-icon-wrapper {
       width: 52px;
       height: 52px;
-      border-radius: 0px;
+      border-radius: 7px;
       background: var(--brand-primary-light);
       color: var(--brand-primary);
       display: flex;
@@ -222,6 +255,7 @@
 
     /* Step Card */
     .step-card {
+      border-radius: 7px;
       background: #ffffff;
       border: 1px solid var(--color-border);
       padding: 2.5rem 2rem;
@@ -288,29 +322,367 @@
       line-height: 1.8;
     }
 
-    /* WhatsApp Simulator Mockup */
-    .whatsapp-device {
-      background: #ffffff;
-      border: 1px solid #e0e0e0;
-      border-radius: 18px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
+    /* ========================================================================= */
+    /* 02. INTRODUCTION SECTION ENHANCEMENT */
+    /* ========================================================================= */
+    .intro-section-wrap {
+      position: relative;
+      background-color: #FAF6F4;
+      background-image:
+        linear-gradient(160deg, rgba(255, 252, 250, 0.72) 0%, rgba(255, 255, 255, 0.78) 55%, rgba(255, 255, 255, 0.95) 100%),
+        url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1800&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+      padding-top: 7rem;
+      padding-bottom: 7rem;
       overflow: hidden;
-      max-width: 440px;
-      margin: 0 auto;
     }
 
-    .whatsapp-header {
-      background: #075E54;
+    .intro-glass-card {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 14px;
+      padding: 4rem 3.5rem;
+      box-shadow:
+        0 32px 80px rgba(113, 2, 20, 0.08),
+        0 8px 24px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      position: relative;
+    }
+
+    @media (max-width: 767.98px) {
+      .intro-glass-card {
+        padding: 2.25rem 1.5rem;
+        border-radius: 14px;
+      }
+
+      .intro-section-wrap {
+        padding-top: 3.5rem;
+        padding-bottom: 3.5rem;
+      }
+    }
+
+    .intro-main-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.3rem, 4vw, 3.4rem);
+      font-weight: 700;
+      color: #111111;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      margin-bottom: 1.35rem;
+    }
+
+    .intro-accent-lead {
+      font-size: 1.13rem;
+      color: var(--color-foreground-muted);
+      font-weight: 400;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .intro-body-text {
+      font-size: 1.12rem;
+      color: var(--color-foreground-muted);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+
+    .intro-highlight-quote {
+      background: linear-gradient(135deg, rgba(113, 2, 20, 0.03) 0%, rgba(248, 235, 231, 0.5) 100%);
+      border: 1px solid rgba(113, 2, 20, 0.1);
+      border-left: 3px solid var(--brand-primary);
+      padding: 1.35rem 1.75rem;
+      border-radius: 0 12px 12px 0;
+      font-size: 1rem;
+      font-weight: 500;
+      font-style: italic;
+      color: #3a3a3a;
+      margin-top: 1.5rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .intro-pillar-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(113, 2, 20, 0.07);
+      border-radius: 8px;
+      padding: 2rem 1.75rem;
+      height: 100%;
+      transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-pillar-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--brand-primary);
+      transition: width 0.35s ease;
+    }
+
+    .intro-pillar-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(113, 2, 20, 0.18);
+      box-shadow: 0 18px 40px rgba(113, 2, 20, 0.1);
+    }
+
+    .intro-pillar-card:hover::after {
+      width: 100%;
+    }
+
+    .intro-pillar-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, #F8EBE7 0%, #FDE8E4 100%);
+      color: var(--brand-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 4px 12px rgba(113, 2, 20, 0.1);
+    }
+
+    /* ========================================================================= */
+    /* HERO SECTION SPECIFIC DESIGN (MATCHING REFERENCE DESIGN) */
+    /* ========================================================================= */
+    .hero-section-wrap {
+      background: linear-gradient(135deg, #FFFFFF 0%, #FAF6F4 45%, #FDF2EF 100%);
+      position: relative;
+      overflow: hidden;
+      padding-top: 4.5rem;
+      padding-bottom: 5.5rem;
+    }
+
+    /* Organic Silk Ribbon Wave Background */
+    .hero-wave-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.55;
+    }
+
+    .hero-content-container {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Introducing Badge (Exact Pill Design) */
+    .badge-introducing {
+      display: inline-block;
+      background-color: var(--badge-bg);
+      color: var(--badge-color);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 2px 8px rgba(113, 2, 20, 0.04);
+      border: 1px solid rgba(113, 2, 20, 0.08);
+    }
+
+    /* Hero Typography */
+    .hero-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(3.2rem, 5.8vw, 4.75rem);
+      font-weight: 700;
+      color: #111111;
+      letter-spacing: -0.02em;
+      line-height: 1.06;
+      margin-bottom: 0.65rem;
+    }
+
+    .hero-subheadline {
+      font-family: var(--font-serif);
+      font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+      font-weight: 600;
+      color: var(--brand-primary);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-lead-text {
+      font-size: 1.14rem;
+      color: var(--color-foreground-muted);
+      max-width: 510px;
+      line-height: 1.68;
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    /* Hero CTA Button */
+    .btn-hero-whatsapp {
+      background-color: var(--brand-primary);
+      color: #ffffff !important;
+      border: 1px solid var(--brand-primary);
+      border-radius: 4px;
+      padding: 15px 32px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      box-shadow: 0 10px 24px rgba(113, 2, 20, 0.28);
+    }
+
+    .btn {
+      border-radius: 4px !important;
+    }
+
+    .btn-hero-whatsapp:hover {
+      background-color: var(--brand-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(113, 2, 20, 0.38);
+      color: #ffffff !important;
+    }
+
+    /* Checkmarks Inline Row */
+    .hero-check-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.35rem;
+      margin-top: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-check-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #111111;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-check-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: #075E54;
       color: #ffffff;
-      padding: 14px 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      flex-shrink: 0;
+    }
+
+    /* Bottom Trust Bar */
+    .hero-trust-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      max-width: 530px;
+    }
+
+    .trust-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #2b2b2b;
+    }
+
+    .trust-divider {
+      width: 1px;
+      height: 20px;
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    /* 3D Realistic Smartphone Mockup Frame */
+    .phone-mockup-wrapper {
+      position: relative;
+      perspective: 1200px;
+      padding: 10px 0;
+    }
+
+    .phone-mockup-chassis {
+      background: #1A1F26;
+      border-radius: 46px;
+      padding: 12px;
+      box-shadow:
+        0 40px 90px -15px rgba(0, 0, 0, 0.35),
+        0 15px 35px -5px rgba(113, 2, 20, 0.18),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.15),
+        inset 0 0 0 4px #0C1014;
+      max-width: 420px;
+      margin: 0 auto;
+      position: relative;
+      transform: rotate(-1.5deg) translateY(-4px);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .phone-mockup-chassis:hover {
+      transform: rotate(0deg) translateY(-8px);
+      box-shadow:
+        0 50px 100px -15px rgba(0, 0, 0, 0.42),
+        0 20px 45px -5px rgba(113, 2, 20, 0.24),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.2),
+        inset 0 0 0 4px #0C1014;
+    }
+
+    /* Phone Speaker / Camera Notch */
+    .phone-top-speaker {
+      width: 60px;
+      height: 4px;
+      background: #2a313a;
+      border-radius: 3px;
+      margin: 0 auto 8px auto;
+    }
+
+    /* Screen Frame */
+    .phone-screen {
+      background: #ffffff;
+      border-radius: 36px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    /* WhatsApp Header */
+    .wa-top-bar {
+      background: #005D4B;
+      color: #ffffff;
+      padding: 14px 16px;
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .whatsapp-avatar {
-      width: 40px;
-      height: 40px;
+    .wa-avatar-circle {
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       background: #ffffff;
       color: var(--brand-primary);
@@ -318,27 +690,46 @@
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     }
 
-    .whatsapp-body {
-      background-color: #EFEAE2;
-      background-image: radial-gradient(#d3c7b6 1px, transparent 1px);
-      background-size: 16px 16px;
-      padding: 20px 16px;
+    .wa-user-info h6 {
+      font-size: 0.96rem;
+      font-weight: 700;
+      margin-bottom: 1px;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .wa-user-info small {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    /* WhatsApp Chat Body Texture */
+    .wa-chat-canvas {
+      background-color: #EFE8DE;
+      background-image:
+        radial-gradient(#d3c6b2 0.8px, transparent 0.8px),
+        radial-gradient(#d3c6b2 0.8px, #EFE8DE 0.8px);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+      padding: 18px 14px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      min-height: 460px;
+      min-height: 450px;
     }
 
     .chat-bubble {
-      max-width: 82%;
-      padding: 10px 14px;
-      font-size: 0.92rem;
+      max-width: 86%;
+      padding: 10px 13px;
+      font-size: 0.9rem;
       line-height: 1.45;
       position: relative;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
     }
 
     .chat-bubble.bot {
@@ -349,17 +740,26 @@
     }
 
     .chat-bubble.user {
-      background: #E7FFDB;
+      background: #D9FDD3;
       color: #111111;
       border-radius: 12px 0 12px 12px;
       align-self: flex-end;
     }
 
     .chat-time {
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       color: rgba(0, 0, 0, 0.45);
       text-align: right;
-      margin-top: 4px;
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 3px;
+    }
+
+    .wa-double-tick {
+      color: #53bdeb;
+      font-size: 0.85rem;
     }
 
     .chat-option-btn {
@@ -371,9 +771,52 @@
       padding: 8px 12px;
       margin-top: 6px;
       border-radius: 6px;
-      border: 1px solid rgba(113, 2, 20, 0.2);
+      border: 1px solid rgba(113, 2, 20, 0.25);
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
+      transition: all 0.2s ease;
+    }
+
+    .chat-option-btn:hover {
+      background: #FDF3F0;
+      color: var(--brand-primary-hover);
+      border-color: var(--brand-primary);
+    }
+
+    /* WhatsApp Bottom Input Bar */
+    .wa-bottom-bar {
+      background: #F0F2F5;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .wa-input-pill {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-grow: 1;
+      color: #8696A0;
+      font-size: 0.88rem;
+    }
+
+    .wa-mic-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #00A884;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0, 168, 132, 0.35);
     }
 
     /* Benefits Grid & Image Styling */
@@ -381,6 +824,7 @@
       background: var(--color-surface-card);
       border: 1px solid var(--color-border);
       padding: 2rem;
+      border-radius: 7px;
       height: 100%;
       transition: all 0.3s ease;
     }
@@ -394,6 +838,7 @@
       border: 1px solid var(--color-border);
       background: #ffffff;
       padding: 10px;
+      border-radius: 7px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
       transition: transform 0.3s ease;
     }
@@ -403,6 +848,7 @@
     }
 
     .placeholder-frame img {
+      border-radius: 7px;
       width: 100%;
       height: auto;
       display: block;
@@ -479,7 +925,7 @@
         <div class="col-4 d-flex align-items-center">
           <button class="btn btn-link text-dark p-0 border-0 text-decoration-none d-flex align-items-center gap-2"
             type="button" data-bs-toggle="offcanvas" data-bs-target="#navDrawer" aria-controls="navDrawer">
-            <i class="bi bi-list fs-3" style="color: var(--color-foreground);"></i>
+            <i class="ri-menu-line fs-3" style="color: var(--color-foreground);"></i>
             <span class="d-none d-md-inline fw-semibold text-uppercase"
               style="font-size: 0.85rem; letter-spacing: 0.1em; color: var(--color-foreground);">Menu</span>
           </button>
@@ -495,10 +941,11 @@
         <!-- Right: Header Quick Action CTA -->
         <div class="col-4 text-end">
           <a href="#hero" class="btn btn-sm btn-brand-primary d-none d-sm-inline-flex">
-            <i class="bi bi-whatsapp"></i> Chat Now
+            <i class="ri-whatsapp-line"></i> <span>Chat Now</span> <i
+              class="ri-arrow-right-line btn-arrow-icon ms-1"></i>
           </a>
           <a href="#hero" class="btn btn-sm btn-brand-primary d-inline-flex d-sm-none p-2">
-            <i class="bi bi-whatsapp fs-6"></i>
+            <i class="ri-whatsapp-line fs-6"></i>
           </a>
         </div>
       </div>
@@ -534,7 +981,8 @@
       </ul>
       <div class="mt-5 pt-4 border-top">
         <a href="#hero" class="btn btn-brand-primary w-100 mb-3" data-bs-dismiss="offcanvas">
-          <i class="bi bi-whatsapp"></i> Start on WhatsApp
+          <i class="ri-whatsapp-fill"></i> <span>Start on WhatsApp</span> <i
+            class="ri-arrow-right-line btn-arrow-icon ms-1"></i>
         </a>
         <p class="small text-muted mb-0">Experience effortless event planning and RSVPs.</p>
       </div>
@@ -543,85 +991,161 @@
 
 
   <!-- ========================================================================= -->
-  <!-- 01. HERO SECTION -->
+  <!-- 01. HERO SECTION (REDESIGNED TO MATCH REFERENCE) -->
   <!-- ========================================================================= -->
-  <section id="hero" class="page-section bg-white pt-5">
-    <div class="container">
+  <section id="hero" class="hero-section-wrap">
+    <!-- Subtle Organic Silk Ribbon Waves Background SVG -->
+    <svg class="hero-wave-svg" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none">
+      <path d="M-100,500 C200,250 450,750 900,450 C1250,200 1450,400 1600,300" stroke="#710214" stroke-width="1.5"
+        stroke-opacity="0.08" fill="none" />
+      <path d="M-50,550 C250,300 500,800 950,500 C1300,250 1500,450 1650,350" stroke="#710214" stroke-width="1"
+        stroke-opacity="0.05" fill="none" />
+      <path d="M0,600 C300,350 550,850 1000,550 C1350,300 1550,500 1700,400" stroke="#710214" stroke-width="0.75"
+        stroke-opacity="0.04" fill="none" />
+      <path d="M-150,450 C150,200 400,700 850,400 C1200,150 1400,350 1550,250" stroke="#710214" stroke-width="1.2"
+        stroke-opacity="0.06" fill="none" />
+    </svg>
+
+    <div class="container hero-content-container">
       <div class="row align-items-center g-5">
-        <!-- Left: Copy & Main CTA -->
+        <!-- Left: Copy, Badge, CTAs, Checkmarks & Trust Bar -->
         <div class="col-lg-6">
-          <h1 class="display-3 fw-bold text-dark mb-3" style="letter-spacing: -0.02em;">
+          <!-- 1. Pill Badge: INTRODUCING -->
+          <div class="mb-2">
+            <span class="badge-introducing">INTRODUCING</span>
+          </div>
+
+          <!-- 2. Headline & Subheadline (Playfair Serif Display) -->
+          <h1 class="hero-headline">
             Meet 8tivity
           </h1>
-          <h2 class="h3 fw-normal mb-4" style="color: var(--brand-primary); letter-spacing: 0.02em;">
+          <h2 class="hero-subheadline">
             Events, made effortless.
           </h2>
-          <p class="lead mb-4" style="font-size: 1.22rem; color: var(--color-foreground-muted); max-width: 520px; line-height: 1.65;">
-            Plan your gathering, manage the details, and collect guest RSVPs — all through the everyday simplicity of WhatsApp. No new apps to download, no complicated platforms to learn.
+
+          <!-- 3. Lead Description -->
+          <p class="hero-lead-text">
+            Plan your gathering, manage the details, and collect guest RSVPs — all through the everyday simplicity of
+            WhatsApp. No new apps to download, no complicated platforms to learn.
           </p>
 
-          <!-- CTA Button -->
-          <div class="d-flex flex-column flex-sm-row align-items-sm-center gap-3 mb-4">
+          <!-- 4. Main CTA Button -->
+          <div class="d-flex flex-column flex-sm-row align-items-sm-center gap-3 mb-2">
             <a href="https://wa.me/?text=Hi%208tivity,%20I%20want%20to%20create%20an%20event" target="_blank"
-              rel="noopener noreferrer" class="btn btn-brand-primary">
-              <i class="bi bi-whatsapp fs-5"></i> Start on WhatsApp →
+              rel="noopener noreferrer" class="btn-hero-whatsapp">
+              <i class="ri-whatsapp-fill fs-5"></i> <span>START ON WHATSAPP</span> <i
+                class="ri-arrow-right-line btn-arrow-icon fs-5"></i>
             </a>
           </div>
 
-          <!-- Supporting Line -->
-          <div class="d-flex align-items-center gap-3 pt-2">
-            <div class="d-flex align-items-center gap-2 text-dark fw-semibold"
-              style="font-size: 0.95rem; letter-spacing: 0.05em;">
-              <span class="badge rounded-circle p-1 bg-success"><i class="bi bi-check text-white"></i></span> Simple.
-              <span class="badge rounded-circle p-1 bg-success"><i class="bi bi-check text-white"></i></span>
-              Conversational.
-              <span class="badge rounded-circle p-1 bg-success"><i class="bi bi-check text-white"></i></span> Connected.
+          <!-- 5. Checkmarks Row: Simple. Conversational. Connected. -->
+          <div class="hero-check-row">
+            <div class="hero-check-item">
+              <span class="hero-check-badge"><i class="ri-check-line text-white"></i></span>
+              <span>Simple.</span>
+            </div>
+            <div class="hero-check-item">
+              <span class="hero-check-badge"><i class="ri-check-line text-white"></i></span>
+              <span>Conversational.</span>
+            </div>
+            <div class="hero-check-item">
+              <span class="hero-check-badge"><i class="ri-check-line text-white"></i></span>
+              <span>Connected.</span>
+            </div>
+          </div>
+
+          <!-- 6. Bottom Trust Feature Bar -->
+          <div class="hero-trust-bar">
+            <div class="trust-item">
+              <i class="ri-whatsapp-fill text-success fs-5"></i>
+              <span>Works on WhatsApp</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+              <i class="ri-download-2-line text-danger fs-5" style="color: var(--brand-primary) !important;"></i>
+              <span>No app to install</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+              <i class="ri-time-line text-danger fs-5" style="color: var(--brand-primary) !important;"></i>
+              <span>Ready in minutes</span>
             </div>
           </div>
         </div>
 
-        <!-- Right: Conversational Visual / WhatsApp Mockup -->
+        <!-- Right: 3D Smartphone Device with WhatsApp Chat -->
         <div class="col-lg-6">
-          <div class="whatsapp-device">
-            <!-- Simulated Header -->
-            <div class="whatsapp-header">
-              <div class="whatsapp-avatar">8</div>
-              <div>
-                <h6 class="mb-0 text-white fw-bold" style="font-size: 1rem;">8tivity Assistant</h6>
-                <small class="text-white-50" style="font-size: 0.75rem;">Official Event Companion • Online</small>
-              </div>
-              <div class="ms-auto fs-5 text-white-50">
-                <i class="bi bi-three-dots-vertical"></i>
-              </div>
-            </div>
+          <div class="phone-mockup-wrapper">
+            <div class="phone-mockup-chassis">
+              <!-- Speaker Pill -->
+              <div class="phone-top-speaker"></div>
 
-            <!-- Simulated Chat Messages -->
-            <div class="whatsapp-body">
-              <div class="chat-bubble bot">
-                👋 Hello! Welcome to <strong>8tivity</strong>. Let’s bring your people together. What are you planning?
-                <div class="chat-time">10:00 AM</div>
-              </div>
+              <!-- Smartphone Screen -->
+              <div class="phone-screen">
+                <!-- WhatsApp Top Header -->
+                <div class="wa-top-bar">
+                  <div class="wa-avatar-circle">8</div>
+                  <div class="wa-user-info">
+                    <h6 class="mb-0">8tivity Assistant</h6>
+                    <small>Official Event Companion • Online</small>
+                  </div>
+                  <div class="ms-auto fs-5 text-white-50">
+                    <i class="ri-more-2-fill"></i>
+                  </div>
+                </div>
 
-              <div class="chat-bubble user">
-                Dinner party with friends this Saturday at 8 PM 🍷
-                <div class="chat-time">10:00 AM</div>
-              </div>
+                <!-- WhatsApp Chat Canvas -->
+                <div class="wa-chat-canvas">
+                  <!-- Bot Greeting Bubble -->
+                  <div class="chat-bubble bot">
+                    👋 Hello! Welcome to <strong>8tivity</strong>. Let’s bring your people together. What are you
+                    planning?
+                    <div class="chat-time">10:00 AM</div>
+                  </div>
 
-              <div class="chat-bubble bot">
-                ✨ Perfect! Your event is ready. Here is your clean RSVP link to drop into your group chat.
-                <a href="#how-it-works" class="chat-option-btn">🔗 View Live Event Card</a>
-                <a href="#capabilities" class="chat-option-btn">📊 Live RSVP Tracker (0 Confirmed)</a>
-                <div class="chat-time">10:01 AM</div>
-              </div>
+                  <!-- User Event Creation Prompt Bubble -->
+                  <div class="chat-bubble user">
+                    Dinner party with friends this Saturday at 8 PM 🍷 💖
+                    <div class="chat-time">
+                      10:00 AM <i class="ri-check-double-line wa-double-tick"></i>
+                    </div>
+                  </div>
 
-              <div class="chat-bubble user">
-                Shared with the group! 🚀
-                <div class="chat-time">10:02 AM</div>
-              </div>
+                  <!-- Bot Event Link & RSVP Card Bubble -->
+                  <div class="chat-bubble bot">
+                    ✨ Perfect! Your event is ready. Here is your clean RSVP link to drop into your group chat.
+                    <a href="#how-it-works" class="chat-option-btn">🔗 View Live Event Card</a>
+                    <a href="#capabilities" class="chat-option-btn">📊 Live RSVP Tracker (0 Confirmed)</a>
+                    <div class="chat-time">10:01 AM</div>
+                  </div>
 
-              <div class="chat-bubble bot">
-                🎉 Great! 6 guests just confirmed attendance. I'll keep your guest list updated in real time.
-                <div class="chat-time">10:03 AM</div>
+                  <!-- User Shared with Group Bubble -->
+                  <div class="chat-bubble user">
+                    Shared with the group! 🎉
+                    <div class="chat-time">
+                      10:02 AM <i class="ri-check-double-line wa-double-tick"></i>
+                    </div>
+                  </div>
+
+                  <!-- Bot Confirmed Live RSVP Update Bubble -->
+                  <div class="chat-bubble bot">
+                    🎉 Great! 6 guests just confirmed attendance. I'll keep your guest list updated in real time.
+                    <div class="chat-time">10:02 AM</div>
+                  </div>
+                </div>
+
+                <!-- WhatsApp Bottom Interactive Input Bar -->
+                <div class="wa-bottom-bar">
+                  <div class="wa-input-pill">
+                    <i class="ri-emotion-line"></i>
+                    <span>Type a message</span>
+                    <i class="ri-attachment-2 ms-auto"></i>
+                  </div>
+                  <div class="wa-mic-btn">
+                    <i class="ri-mic-fill"></i>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -632,27 +1156,92 @@
 
 
   <!-- ========================================================================= -->
-  <!-- 02. INTRODUCTION -->
+  <!-- 02. INTRODUCTION (ELEGANT EDITORIAL FLOW WITH UNSPASH LIFESTYLE BACKDROP) -->
   <!-- ========================================================================= -->
-  <section id="introduction" class="page-section"
-    style="background-color: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+  <section id="introduction" class="intro-section-wrap">
     <div class="container">
-      <div class="row justify-content-center text-center">
-        <div class="col-lg-9 col-xl-8">
-          <!-- <span class="section-tag">02 / Introduction</span> -->
-          <h2 class="display-5 fw-bold text-dark mb-4">
-            Everything starts with a conversation.
+      <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-9">
+          <!-- Glassmorphism Narrative Card -->
+          <div class="intro-glass-card text-center">
+            <!-- Pill Badge -->
+            <div class="mb-3">
+              <span class="badge-introducing">A SIMPLER WAY</span>
+            </div>
 
-          </h2>
-          <p class="fs-4 fw-medium mb-4" style="color: var(--brand-primary); line-height: 1.5;">
-            Managing an event shouldn't mean navigating complicated platforms, filling out endless forms or asking
-            guests to download another app. 8tivity brings a simpler approach to event management, right into WhatsApp.
-          <p class="fs-4 fw-medium">From creating an event and setting its details to sharing it with guests and
-            collecting RSVPs, 8tivity guides you through each step with a simple, conversational experience.</p>
-          <p class="fs-5 text-muted mb-0" style="line-height: 1.8;">
-            No complicated setup. No extra apps. Just WhatsApp, a few simple steps, and everything you need to bring
-            your event together.
-          </p>
+            <!-- Serif Headline -->
+            <h2 class="intro-main-title">
+              Everything starts with a conversation.
+            </h2>
+
+            <!-- Exact User Text 1: Lead Subhead -->
+            <p class="intro-accent-lead">
+              Managing an event shouldn't mean navigating complicated platforms, filling out endless forms or asking
+              guests to download another app. 8tivity brings a simpler approach to event management, right into
+              WhatsApp.
+            </p>
+
+            <!-- Exact User Text 2: Narrative Passage -->
+            <p class="intro-body-text">
+              From creating an event and setting its details to sharing it with guests and collecting RSVPs, 8tivity
+              guides you through each step with a simple, conversational experience.
+            </p>
+
+            <!-- Exact User Text 3: Highlight Callout Box -->
+            <div class="intro-highlight-quote text-start d-flex align-items-center gap-3">
+              <i class="ri-chat-smile-3-line fs-3" style="color: var(--brand-primary) !important;"></i>
+              <div>
+                No complicated setup. No extra apps. Just WhatsApp, a few simple steps, and everything you need to bring
+                your event together.
+              </div>
+            </div>
+
+            <!-- 3 Floating Value Pillars to give rhythmic flow -->
+            <div class="row g-3 text-start">
+              <div class="col-md-4">
+                <div class="intro-pillar-card">
+                  <div class="d-flex align-items-center gap-2 mb-3">
+                    <div class="intro-pillar-icon">
+                      <i class="ri-apps-2-line"></i>
+                    </div>
+                  </div>
+                  <h5 class="fw-bold text-dark mb-2" style="font-size: 1.1rem; letter-spacing: -0.01em;">Zero New Apps
+                  </h5>
+                  <p class="mb-0" style="font-size: 0.93rem; color: var(--color-foreground-subtle); line-height: 1.65;">
+                    Runs 100% inside WhatsApp. No app stores, accounts, or friction of any kind.</p>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="intro-pillar-card">
+                  <div class="d-flex align-items-center gap-2 mb-3">
+                    <div class="intro-pillar-icon">
+                      <i class="ri-chat-voice-line"></i>
+                    </div>
+                  </div>
+                  <h5 class="fw-bold text-dark mb-2" style="font-size: 1.1rem; letter-spacing: -0.01em;">Conversational
+                    Ease</h5>
+                  <p class="mb-0" style="font-size: 0.93rem; color: var(--color-foreground-subtle); line-height: 1.65;">
+                    Guided prompts walk you through every step — date, venue, guest list — in natural chat.</p>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="intro-pillar-card">
+                  <div class="d-flex align-items-center gap-2 mb-3">
+                    <div class="intro-pillar-icon">
+                      <i class="ri-user-smile-line"></i>
+                    </div>
+                  </div>
+                  <h5 class="fw-bold text-dark mb-2" style="font-size: 1.1rem; letter-spacing: -0.01em;">Instant RSVPs
+                  </h5>
+                  <p class="mb-0" style="font-size: 0.93rem; color: var(--color-foreground-subtle); line-height: 1.65;">
+                    One-tap guest responses, tracked automatically. Your headcount updates itself in real time.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
@@ -675,7 +1264,7 @@
         </div>
         <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
           <a href="#how-it-works" class="btn btn-brand-outline">
-            See How It Works ↓
+            <span>See How It Works</span> <i class="ri-arrow-down-line btn-arrow-icon ms-1"></i>
           </a>
         </div>
       </div>
@@ -686,11 +1275,12 @@
         <div class="col-md-6 col-lg-4">
           <div class="feature-card">
             <div class="feature-icon-wrapper">
-              <i class="bi bi-calendar-plus"></i>
+              <i class="ri-calendar-event-line"></i>
             </div>
             <h4 class="h5 fw-bold text-dark mb-2">Create Events</h4>
             <p class="text-muted mb-0">
-              Set up your gathering in seconds through natural chat prompts. No templates to configure or lengthy forms to complete.
+              Set up your gathering in seconds through natural chat prompts. No templates to configure or lengthy forms
+              to complete.
             </p>
           </div>
         </div>
@@ -699,11 +1289,12 @@
         <div class="col-md-6 col-lg-4">
           <div class="feature-card">
             <div class="feature-icon-wrapper">
-              <i class="bi bi-sliders"></i>
+              <i class="ri-equalizer-line"></i>
             </div>
             <h4 class="h5 fw-bold text-dark mb-2">Manage Details</h4>
             <p class="text-muted mb-0">
-              Update venues, adjust start times, or add dress code notes on the go. Your event page stays automatically synced.
+              Update venues, adjust start times, or add dress code notes on the go. Your event page stays automatically
+              synced.
             </p>
           </div>
         </div>
@@ -712,11 +1303,12 @@
         <div class="col-md-6 col-lg-4">
           <div class="feature-card">
             <div class="feature-icon-wrapper">
-              <i class="bi bi-person-check"></i>
+              <i class="ri-user-follow-line"></i>
             </div>
             <h4 class="h5 fw-bold text-dark mb-2">Collect RSVPs</h4>
             <p class="text-muted mb-0">
-              Guests confirm attendance with a single tap. No account creation required, eliminating the usual friction of guest responses.
+              Guests confirm attendance with a single tap. No account creation required, eliminating the usual friction
+              of guest responses.
             </p>
           </div>
         </div>
@@ -725,11 +1317,12 @@
         <div class="col-md-6 col-lg-4">
           <div class="feature-card">
             <div class="feature-icon-wrapper">
-              <i class="bi bi-compass"></i>
+              <i class="ri-compass-3-line"></i>
             </div>
             <h4 class="h5 fw-bold text-dark mb-2">Guided Setup</h4>
             <p class="text-muted mb-0">
-              8tivity walks you through each detail step by step, so you never have to second-guess if you missed crucial info.
+              8tivity walks you through each detail step by step, so you never have to second-guess if you missed
+              crucial info.
             </p>
           </div>
         </div>
@@ -738,11 +1331,12 @@
         <div class="col-md-6 col-lg-4">
           <div class="feature-card">
             <div class="feature-icon-wrapper">
-              <i class="bi bi-whatsapp"></i>
+              <i class="ri-whatsapp-line"></i>
             </div>
             <h4 class="h5 fw-bold text-dark mb-2">Built for WhatsApp</h4>
             <p class="text-muted mb-0">
-              Lives directly in the messenger everyone already checks daily. Zero app downloads, zero logins, and instant engagement.
+              Lives directly in the messenger everyone already checks daily. Zero app downloads, zero logins, and
+              instant engagement.
             </p>
           </div>
         </div>
@@ -751,11 +1345,12 @@
         <div class="col-md-6 col-lg-4">
           <div class="feature-card">
             <div class="feature-icon-wrapper">
-              <i class="bi bi-chat-heart"></i>
+              <i class="ri-chat-smile-3-line"></i>
             </div>
             <h4 class="h5 fw-bold text-dark mb-2">Stay Connected</h4>
             <p class="text-muted mb-0">
-              Send timely reminders, share updates, and maintain direct communication with your guests without losing the personal touch.
+              Send timely reminders, share updates, and maintain direct communication with your guests without losing
+              the personal touch.
             </p>
           </div>
         </div>
@@ -800,7 +1395,8 @@
             <div class="step-number">02</div>
             <h3 class="h4 fw-bold text-dark mb-3">Create</h3>
             <p class="text-muted mb-0">
-              Answer a few quick conversational prompts — event name, time, and location — and get a beautiful invite card in seconds.
+              Answer a few quick conversational prompts — event name, time, and location — and get a beautiful invite
+              card in seconds.
             </p>
           </div>
         </div>
@@ -811,7 +1407,8 @@
             <div class="step-number">03</div>
             <h3 class="h4 fw-bold text-dark mb-3">Connect</h3>
             <p class="text-muted mb-0">
-              Drop the link into your group chats, collect one-tap RSVPs, and watch your guest list update effortlessly in real time.
+              Drop the link into your group chats, collect one-tap RSVPs, and watch your guest list update effortlessly
+              in real time.
             </p>
           </div>
         </div>
@@ -855,8 +1452,8 @@
 
         <div class="col-md-4">
           <div class="placeholder-frame">
-            <img src="https://placehold.co/600x400/1a1a1a/ffffff?text=02+Instant+Event+Card" alt="Event Details Interface"
-              class="img-fluid">
+            <img src="https://placehold.co/600x400/1a1a1a/ffffff?text=02+Instant+Event+Card"
+              alt="Event Details Interface" class="img-fluid">
             <div class="p-3 text-center">
               <h5 class="fw-bold text-dark mb-1">02. Instant Event Card</h5>
               <small class="text-muted">A clean, shareable invitation ready for group chats</small>
@@ -903,12 +1500,13 @@
           <div class="benefit-item">
             <div class="d-flex align-items-start gap-3">
               <div class="fs-2 text-danger" style="color: var(--brand-primary) !important;">
-                <i class="bi bi-app"></i>
+                <i class="ri-apps-2-line"></i>
               </div>
               <div>
                 <h3 class="h4 fw-bold text-dark mb-2">No New App</h3>
                 <p class="text-muted mb-0">
-                  Everything happens through WhatsApp. No app store downloads, no forgotten passwords, and no new accounts for anyone.
+                  Everything happens through WhatsApp. No app store downloads, no forgotten passwords, and no new
+                  accounts for anyone.
                 </p>
               </div>
             </div>
@@ -920,12 +1518,13 @@
           <div class="benefit-item">
             <div class="d-flex align-items-start gap-3">
               <div class="fs-2 text-danger" style="color: var(--brand-primary) !important;">
-                <i class="bi bi-hand-thumbs-up"></i>
+                <i class="ri-thumb-up-line"></i>
               </div>
               <div>
                 <h3 class="h4 fw-bold text-dark mb-2">Easy to Use</h3>
                 <p class="text-muted mb-0">
-                  A guided, human-first experience makes every action intuitive — from setting up dates to tracking who’s arriving.
+                  A guided, human-first experience makes every action intuitive — from setting up dates to tracking
+                  who’s arriving.
                 </p>
               </div>
             </div>
@@ -937,12 +1536,13 @@
           <div class="benefit-item">
             <div class="d-flex align-items-start gap-3">
               <div class="fs-2 text-danger" style="color: var(--brand-primary) !important;">
-                <i class="bi bi-lightning-charge"></i>
+                <i class="ri-flashlight-line"></i>
               </div>
               <div>
                 <h3 class="h4 fw-bold text-dark mb-2">Quick to Set Up</h3>
                 <p class="text-muted mb-0">
-                  Create and share your event in less time than it takes to brew coffee. No waiting, no bloated interfaces, just results.
+                  Create and share your event in less time than it takes to brew coffee. No waiting, no bloated
+                  interfaces, just results.
                 </p>
               </div>
             </div>
@@ -954,12 +1554,13 @@
           <div class="benefit-item">
             <div class="d-flex align-items-start gap-3">
               <div class="fs-2 text-danger" style="color: var(--brand-primary) !important;">
-                <i class="bi bi-people"></i>
+                <i class="ri-group-line"></i>
               </div>
               <div>
                 <h3 class="h4 fw-bold text-dark mb-2">Accessible to Everyone</h3>
                 <p class="text-muted mb-0">
-                  Because it lives on WhatsApp, guests of every generation can view invites and confirm their RSVP immediately with zero confusion.
+                  Because it lives on WhatsApp, guests of every generation can view invites and confirm their RSVP
+                  immediately with zero confusion.
                 </p>
               </div>
             </div>
@@ -981,7 +1582,8 @@
             Less planning. More connecting.
           </h2>
           <p class="statement-text">
-            8tivity takes the complexity out of event management, so you can focus on what truly matters — being together with the people you care about.
+            8tivity takes the complexity out of event management, so you can focus on what truly matters — being
+            together with the people you care about.
           </p>
         </div>
       </div>
@@ -1007,7 +1609,8 @@
           <div class="mb-4">
             <a href="https://wa.me/?text=Hi%208tivity,%20let's%20start%20my%20event" target="_blank"
               rel="noopener noreferrer" class="btn btn-brand-primary btn-lg px-5 py-3">
-              <i class="bi bi-whatsapp fs-4"></i> Chat with 8tivity →
+              <i class="ri-whatsapp-fill fs-4"></i> <span>Chat with 8tivity</span> <i
+                class="ri-arrow-right-line btn-arrow-icon fs-4 ms-1"></i>
             </a>
           </div>
 
@@ -1050,15 +1653,15 @@
         <div class="col-md-4">
           <h6>Follow Us</h6>
           <div class="d-flex align-items-center">
-            <a href="https://facebook.com" class="social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://facebook.com" class="social-btn" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
             <a href="https://instagram.com" class="social-btn" aria-label="Instagram"><i
-                class="bi bi-instagram"></i></a>
-            <a href="https://linkedin.com" class="social-btn" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-            <a href="https://youtube.com" class="social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                class="ri-instagram-line"></i></a>
+            <a href="https://linkedin.com" class="social-btn" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+            <a href="https://youtube.com" class="social-btn" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
             <a href="https://twitter.com" class="social-btn" aria-label="Twitter / X"><i
-                class="bi bi-twitter-x"></i></a>
+                class="ri-twitter-x-fill"></i></a>
             <a href="https://pinterest.com" class="social-btn" aria-label="Pinterest"><i
-                class="bi bi-pinterest"></i></a>
+                class="ri-pinterest-fill"></i></a>
           </div>
         </div>
       </div>
