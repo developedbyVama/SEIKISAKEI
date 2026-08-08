@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8tivity — Events, made effortless | Seiki Sakei</title>
+  <meta name="description"
+    content="Meet 8tivity. Create events, manage details and collect RSVPs — all through the simplicity of WhatsApp. Simple. Conversational. Connected.">
+  <meta name="theme-color" content="#710214">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Google Fonts: Assistant & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      /* Brand Color Tokens inherited from Seiki Sakei */
+      --brand-primary: #710214;
+      --brand-primary-hover: #54010e;
+      --brand-primary-light: rgba(113, 2, 20, 0.06);
+      --brand-primary-border: rgba(113, 2, 20, 0.18);
+      --whatsapp-green: #25D366;
+      --whatsapp-dark: #128C7E;
+
+      --color-foreground: #1a1a1a;
+      --color-foreground-muted: rgba(26, 26, 26, 0.75);
+      --color-foreground-subtle: rgba(26, 26, 26, 0.55);
+      --color-background: #ffffff;
+      --color-surface: #f9f9fb;
+      --color-surface-card: #ffffff;
+      --color-border: #eaeaea;
+      --color-footer-bg: #710214;
+
+      /* Spacing Rules: 6rem Desktop / 3rem Mobile */
+      --section-gap: 6rem;
+      --container-max-width: 1200px;
+
+      /* Typography */
+      --font-primary: 'Assistant', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-heading: 'Assistant', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    @media (max-width: 767.98px) {
+      :root {
+        --section-gap: 3rem;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      color: var(--color-foreground-muted);
+      background-color: var(--color-background);
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--font-heading);
+      color: var(--color-foreground);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+
+    p {
+      margin-bottom: 1.25rem;
+    }
+
+    /* Section Architecture Gap */
+    .page-section {
+      padding-top: var(--section-gap);
+      padding-bottom: var(--section-gap);
+      position: relative;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--brand-primary);
+      margin-bottom: 0.85rem;
+    }
+
+    /* Button Architecture (Seiki Sakei Clean Minimalist Square CTAs) */
+    .btn-brand-primary {
+      background-color: var(--brand-primary);
+      color: #ffffff !important;
+      border: 1px solid var(--brand-primary);
+      border-radius: 0px;
+      padding: 14px 34px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.25s ease-in-out;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .btn-brand-primary:hover {
+      background-color: var(--brand-primary-hover);
+      border-color: var(--brand-primary-hover);
+      color: #ffffff !important;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(113, 2, 20, 0.22);
+    }
+
+    .btn-brand-outline {
+      background-color: transparent;
+      color: var(--brand-primary) !important;
+      border: 1px solid var(--brand-primary);
+      border-radius: 0px;
+      padding: 14px 34px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.25s ease-in-out;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .btn-brand-outline:hover {
+      background-color: var(--brand-primary);
+      color: #ffffff !important;
+      transform: translateY(-2px);
+    }
+
+    /* Header & Navigation */
+    .site-header {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #f0f0f0;
+      position: sticky;
+      top: 0;
+      z-index: 1050;
+      transition: all 0.3s ease;
+    }
+
+    .brand-logo-text {
+      color: var(--brand-primary);
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    /* Card System */
+    .feature-card {
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border);
+      border-radius: 0px;
+      padding: 2.25rem 2rem;
+      height: 100%;
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0%;
+      background-color: var(--brand-primary);
+      transition: height 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--brand-primary-border);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.05);
+    }
+
+    .feature-card:hover::before {
+      height: 100%;
+    }
+
+    .feature-icon-wrapper {
+      width: 52px;
+      height: 52px;
+      border-radius: 0px;
+      background: var(--brand-primary-light);
+      color: var(--brand-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Step Card */
+    .step-card {
+      background: #ffffff;
+      border: 1px solid var(--color-border);
+      padding: 2.5rem 2rem;
+      height: 100%;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .step-number {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--brand-primary);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: 1.25rem;
+      font-feature-settings: "tnum";
+    }
+
+    .step-card:hover {
+      border-color: var(--brand-primary);
+      box-shadow: 0 12px 30px rgba(113, 2, 20, 0.08);
+      transform: translateY(-3px);
+    }
+
+    .step-card:hover .step-number {
+      opacity: 1;
+    }
+
+    /* Statement Section */
+    .statement-section {
+      background-color: var(--brand-primary);
+      color: #ffffff;
+      padding-top: calc(var(--section-gap) * 1.3);
+      padding-bottom: calc(var(--section-gap) * 1.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .statement-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+      pointer-events: none;
+    }
+
+    .statement-title {
+      font-size: calc(2.2rem + 1.8vw);
+      font-weight: 700;
+      line-height: 1.15;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+
+    .statement-text {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 300;
+      max-width: 720px;
+      margin: 1.75rem auto 0;
+      line-height: 1.8;
+    }
+
+    /* WhatsApp Simulator Mockup */
+    .whatsapp-device {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 18px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .whatsapp-header {
+      background: #075E54;
+      color: #ffffff;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .whatsapp-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: var(--brand-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .whatsapp-body {
+      background-color: #EFEAE2;
+      background-image: radial-gradient(#d3c7b6 1px, transparent 1px);
+      background-size: 16px 16px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 460px;
+    }
+
+    .chat-bubble {
+      max-width: 82%;
+      padding: 10px 14px;
+      font-size: 0.92rem;
+      line-height: 1.45;
+      position: relative;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-bubble.bot {
+      background: #ffffff;
+      color: #111111;
+      border-radius: 0 12px 12px 12px;
+      align-self: flex-start;
+    }
+
+    .chat-bubble.user {
+      background: #E7FFDB;
+      color: #111111;
+      border-radius: 12px 0 12px 12px;
+      align-self: flex-end;
+    }
+
+    .chat-time {
+      font-size: 0.68rem;
+      color: rgba(0, 0, 0, 0.45);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    .chat-option-btn {
+      display: block;
+      background: #ffffff;
+      color: var(--brand-primary);
+      font-weight: 600;
+      text-align: center;
+      padding: 8px 12px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid rgba(113, 2, 20, 0.2);
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+
+    /* Benefits Grid & Image Styling */
+    .benefit-item {
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border);
+      padding: 2rem;
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .benefit-item:hover {
+      border-color: var(--brand-primary);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+    }
+
+    .placeholder-frame {
+      border: 1px solid var(--color-border);
+      background: #ffffff;
+      padding: 10px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s ease;
+    }
+
+    .placeholder-frame:hover {
+      transform: translateY(-4px);
+    }
+
+    .placeholder-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Footer matching Seiki Sakei */
+    .site-footer {
+      background-color: var(--color-footer-bg);
+      color: #ffffff;
+      padding-top: 4.5rem;
+      padding-bottom: 2.5rem;
+      font-size: 0.95rem;
+    }
+
+    .site-footer h6 {
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .site-footer a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .site-footer a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      background: #ffffff;
+      color: var(--brand-primary);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 2rem;
+      margin-top: 3.5rem;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.65);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ========================================================================= -->
+  <!-- SITE HEADER & NAVIGATION -->
+  <!-- ========================================================================= -->
+  <header class="site-header py-3">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Left: Offcanvas Drawer Menu Trigger -->
+        <div class="col-4 d-flex align-items-center">
+          <button class="btn btn-link text-dark p-0 border-0 text-decoration-none d-flex align-items-center gap-2"
+            type="button" data-bs-toggle="offcanvas" data-bs-target="#navDrawer" aria-controls="navDrawer">
+            <i class="bi bi-list fs-3" style="color: var(--color-foreground);"></i>
+            <span class="d-none d-md-inline fw-semibold text-uppercase"
+              style="font-size: 0.85rem; letter-spacing: 0.1em; color: var(--color-foreground);">Menu</span>
+          </button>
+        </div>
+
+        <!-- Center: Brand Logo -->
+        <div class="col-4 text-center">
+          <a href="https://seikisakei.com/" class="brand-logo-text">
+            SEIKI SAKEI
+          </a>
+        </div>
+
+        <!-- Right: Header Quick Action CTA -->
+        <div class="col-4 text-end">
+          <a href="#hero" class="btn btn-sm btn-brand-primary d-none d-sm-inline-flex">
+            <i class="bi bi-whatsapp"></i> Chat Now
+          </a>
+          <a href="#hero" class="btn btn-sm btn-brand-primary d-inline-flex d-sm-none p-2">
+            <i class="bi bi-whatsapp fs-6"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Side Navigation Offcanvas Drawer (Matches Seiki Sakei Menu Flow) -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="navDrawer" aria-labelledby="navDrawerLabel"
+    style="width: 320px;">
+    <div class="offcanvas-header border-bottom py-4 px-4">
+      <h5 class="offcanvas-title fw-bold text-uppercase" id="navDrawerLabel"
+        style="color: var(--brand-primary); letter-spacing: 0.1em;">SEIKI SAKEI</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body px-4 py-4">
+      <ul class="nav flex-column gap-3 fs-5">
+        <li class="nav-item"><a class="nav-link text-dark p-0 fw-medium" href="https://seikisakei.com/">Home</a></li>
+        <li class="nav-item"><a class="nav-link p-0 fw-bold" href="#hero" style="color: var(--brand-primary);">8tivity
+            on WhatsApp <span class="badge bg-danger rounded-0 ms-1"
+              style="font-size: 0.65rem; vertical-align: middle;">NEW</span></a></li>
+        <li class="nav-item"><a class="nav-link text-dark p-0 fw-medium"
+            href="https://seikisakei.com/products/sea-petal">Sea Petal</a></li>
+        <li class="nav-item"><a class="nav-link text-dark p-0 fw-medium"
+            href="https://seikisakei.com/products/pearl-solitaire">Pearl Solitaire</a></li>
+        <li class="nav-item"><a class="nav-link text-dark p-0 fw-medium"
+            href="https://seikisakei.com/products/womens-day-pouch">Women’s Day Gift Set</a></li>
+        <li class="nav-item"><a class="nav-link text-dark p-0 fw-medium"
+            href="https://seikisakei.com/pages/our-story">Our Story</a></li>
+        <li class="nav-item"><a class="nav-link text-dark p-0 fw-medium"
+            href="https://seikisakei.com/pages/brand">Brand</a></li>
+        <li class="nav-item"><a class="nav-link text-dark p-0 fw-medium"
+            href="https://seikisakei.com/pages/contact">Contact Us</a></li>
+      </ul>
+      <div class="mt-5 pt-4 border-top">
+        <a href="#hero" class="btn btn-brand-primary w-100 mb-3" data-bs-dismiss="offcanvas">
+          <i class="bi bi-whatsapp"></i> Start on WhatsApp
+        </a>
+        <p class="small text-muted mb-0">Experience effortless event planning and RSVPs.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- 01. HERO SECTION -->
+  <!-- ========================================================================= -->
+  <section id="hero" class="page-section bg-white pt-5">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <!-- Left: Copy & Main CTA -->
+        <div class="col-lg-6">
+          <h1 class="display-3 fw-bold text-dark mb-3" style="letter-spacing: -0.02em;">
+            Meet 8tivity
+          </h1>
+          <h2 class="h3 fw-normal mb-4" style="color: var(--brand-primary); letter-spacing: 0.02em;">
+            Events, made effortless.
+          </h2>
+          <p class="lead mb-4" style="font-size: 1.22rem; color: var(--color-foreground-muted); max-width: 520px; line-height: 1.65;">
+            Plan your gathering, manage the details, and collect guest RSVPs — all through the everyday simplicity of WhatsApp. No new apps to download, no complicated platforms to learn.
+          </p>
+
+          <!-- CTA Button -->
+          <div class="d-flex flex-column flex-sm-row align-items-sm-center gap-3 mb-4">
+            <a href="https://wa.me/?text=Hi%208tivity,%20I%20want%20to%20create%20an%20event" target="_blank"
+              rel="noopener noreferrer" class="btn btn-brand-primary">
+              <i class="bi bi-whatsapp fs-5"></i> Start on WhatsApp →
+            </a>
+          </div>
+
+          <!-- Supporting Line -->
+          <div class="d-flex align-items-center gap-3 pt-2">
+            <div class="d-flex align-items-center gap-2 text-dark fw-semibold"
+              style="font-size: 0.95rem; letter-spacing: 0.05em;">
+              <span class="badge rounded-circle p-1 bg-success"><i class="bi bi-check text-white"></i></span> Simple.
+              <span class="badge rounded-circle p-1 bg-success"><i class="bi bi-check text-white"></i></span>
+              Conversational.
+              <span class="badge rounded-circle p-1 bg-success"><i class="bi bi-check text-white"></i></span> Connected.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Conversational Visual / WhatsApp Mockup -->
+        <div class="col-lg-6">
+          <div class="whatsapp-device">
+            <!-- Simulated Header -->
+            <div class="whatsapp-header">
+              <div class="whatsapp-avatar">8</div>
+              <div>
+                <h6 class="mb-0 text-white fw-bold" style="font-size: 1rem;">8tivity Assistant</h6>
+                <small class="text-white-50" style="font-size: 0.75rem;">Official Event Companion • Online</small>
+              </div>
+              <div class="ms-auto fs-5 text-white-50">
+                <i class="bi bi-three-dots-vertical"></i>
+              </div>
+            </div>
+
+            <!-- Simulated Chat Messages -->
+            <div class="whatsapp-body">
+              <div class="chat-bubble bot">
+                👋 Hello! Welcome to <strong>8tivity</strong>. Let’s bring your people together. What are you planning?
+                <div class="chat-time">10:00 AM</div>
+              </div>
+
+              <div class="chat-bubble user">
+                Dinner party with friends this Saturday at 8 PM 🍷
+                <div class="chat-time">10:00 AM</div>
+              </div>
+
+              <div class="chat-bubble bot">
+                ✨ Perfect! Your event is ready. Here is your clean RSVP link to drop into your group chat.
+                <a href="#how-it-works" class="chat-option-btn">🔗 View Live Event Card</a>
+                <a href="#capabilities" class="chat-option-btn">📊 Live RSVP Tracker (0 Confirmed)</a>
+                <div class="chat-time">10:01 AM</div>
+              </div>
+
+              <div class="chat-bubble user">
+                Shared with the group! 🚀
+                <div class="chat-time">10:02 AM</div>
+              </div>
+
+              <div class="chat-bubble bot">
+                🎉 Great! 6 guests just confirmed attendance. I'll keep your guest list updated in real time.
+                <div class="chat-time">10:03 AM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 02. INTRODUCTION -->
+  <!-- ========================================================================= -->
+  <section id="introduction" class="page-section"
+    style="background-color: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-9 col-xl-8">
+          <!-- <span class="section-tag">02 / Introduction</span> -->
+          <h2 class="display-5 fw-bold text-dark mb-4">
+            Everything starts with a conversation.
+
+          </h2>
+          <p class="fs-4 fw-medium mb-4" style="color: var(--brand-primary); line-height: 1.5;">
+            Managing an event shouldn't mean navigating complicated platforms, filling out endless forms or asking
+            guests to download another app. 8tivity brings a simpler approach to event management, right into WhatsApp.
+          <p class="fs-4 fw-medium">From creating an event and setting its details to sharing it with guests and
+            collecting RSVPs, 8tivity guides you through each step with a simple, conversational experience.</p>
+          <p class="fs-5 text-muted mb-0" style="line-height: 1.8;">
+            No complicated setup. No extra apps. Just WhatsApp, a few simple steps, and everything you need to bring
+            your event together.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 03. CAPABILITIES -->
+  <!-- ========================================================================= -->
+  <section id="capabilities" class="page-section bg-white">
+    <div class="container">
+      <div class="row justify-content-between align-items-end mb-5">
+        <div class="col-lg-7">
+          <h2 class="display-5 fw-bold text-dark mb-2">
+            Everything you need. Right on WhatsApp.
+          </h2>
+          <p class="lead text-muted mb-0">
+            From your first message to the final headcount, handle every event essential in one familiar place.
+          </p>
+        </div>
+        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+          <a href="#how-it-works" class="btn btn-brand-outline">
+            See How It Works ↓
+          </a>
+        </div>
+      </div>
+
+      <!-- 6 Capability Cards (3x2 Grid) -->
+      <div class="row g-4">
+        <!-- 1. Create Events -->
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-calendar-plus"></i>
+            </div>
+            <h4 class="h5 fw-bold text-dark mb-2">Create Events</h4>
+            <p class="text-muted mb-0">
+              Set up your gathering in seconds through natural chat prompts. No templates to configure or lengthy forms to complete.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2. Manage Details -->
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-sliders"></i>
+            </div>
+            <h4 class="h5 fw-bold text-dark mb-2">Manage Details</h4>
+            <p class="text-muted mb-0">
+              Update venues, adjust start times, or add dress code notes on the go. Your event page stays automatically synced.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3. Collect RSVPs -->
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-person-check"></i>
+            </div>
+            <h4 class="h5 fw-bold text-dark mb-2">Collect RSVPs</h4>
+            <p class="text-muted mb-0">
+              Guests confirm attendance with a single tap. No account creation required, eliminating the usual friction of guest responses.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4. Guided Setup -->
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-compass"></i>
+            </div>
+            <h4 class="h5 fw-bold text-dark mb-2">Guided Setup</h4>
+            <p class="text-muted mb-0">
+              8tivity walks you through each detail step by step, so you never have to second-guess if you missed crucial info.
+            </p>
+          </div>
+        </div>
+
+        <!-- 5. Built for WhatsApp -->
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-whatsapp"></i>
+            </div>
+            <h4 class="h5 fw-bold text-dark mb-2">Built for WhatsApp</h4>
+            <p class="text-muted mb-0">
+              Lives directly in the messenger everyone already checks daily. Zero app downloads, zero logins, and instant engagement.
+            </p>
+          </div>
+        </div>
+
+        <!-- 6. Stay Connected -->
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-chat-heart"></i>
+            </div>
+            <h4 class="h5 fw-bold text-dark mb-2">Stay Connected</h4>
+            <p class="text-muted mb-0">
+              Send timely reminders, share updates, and maintain direct communication with your guests without losing the personal touch.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 04. HOW IT WORKS -->
+  <!-- ========================================================================= -->
+  <section id="how-it-works" class="page-section"
+    style="background-color: var(--color-surface); border-top: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="row justify-content-center text-center mb-5">
+        <div class="col-lg-8">
+          <h2 class="display-5 fw-bold text-dark mb-3">
+            Simple from start to finish.
+          </h2>
+          <p class="lead text-muted mb-0">
+            A frictionless three-step journey designed to take you from an initial idea to a confirmed guest list.
+          </p>
+        </div>
+      </div>
+
+      <!-- 3 Steps Grid -->
+      <div class="row g-4">
+        <!-- Step 01 -->
+        <div class="col-lg-4">
+          <div class="step-card">
+            <div class="step-number">01</div>
+            <h3 class="h4 fw-bold text-dark mb-3">Start</h3>
+            <p class="text-muted mb-0">
+              Open WhatsApp and say hi to 8tivity. Your dedicated event companion is ready whenever inspiration strikes.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 02 -->
+        <div class="col-lg-4">
+          <div class="step-card">
+            <div class="step-number">02</div>
+            <h3 class="h4 fw-bold text-dark mb-3">Create</h3>
+            <p class="text-muted mb-0">
+              Answer a few quick conversational prompts — event name, time, and location — and get a beautiful invite card in seconds.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 03 -->
+        <div class="col-lg-4">
+          <div class="step-card">
+            <div class="step-number">03</div>
+            <h3 class="h4 fw-bold text-dark mb-3">Connect</h3>
+            <p class="text-muted mb-0">
+              Drop the link into your group chats, collect one-tap RSVPs, and watch your guest list update effortlessly in real time.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 05. PRODUCT EXPERIENCE / SCREENSHOTS -->
+  <!-- ========================================================================= -->
+  <section id="product-experience" class="page-section bg-white">
+    <div class="container">
+      <div class="row justify-content-center text-center mb-5">
+        <div class="col-lg-8">
+          <h2 class="display-5 fw-bold text-dark mb-3">
+            See 8tivity in action
+          </h2>
+          <p class="fs-5 text-muted mb-2">
+            From drafting your invite to welcoming your attendees, experience how natural event planning can feel.
+          </p>
+          <div class="fw-bold fs-5 text-uppercase tracking-wide"
+            style="color: var(--brand-primary); letter-spacing: 0.12em;">
+            Create. Share. Connect.
+          </div>
+        </div>
+      </div>
+
+      <!-- Screenshot Showcase Grid using https://placehold.co/600x400 -->
+      <div class="row g-4 align-items-center">
+        <div class="col-md-4">
+          <div class="placeholder-frame">
+            <img src="https://placehold.co/600x400/710214/ffffff?text=01+Start+on+WhatsApp"
+              alt="WhatsApp Conversation Setup" class="img-fluid">
+            <div class="p-3 text-center">
+              <h5 class="fw-bold text-dark mb-1">01. Conversational Setup</h5>
+              <small class="text-muted">Simple chat prompts guide you smoothly</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="placeholder-frame">
+            <img src="https://placehold.co/600x400/1a1a1a/ffffff?text=02+Instant+Event+Card" alt="Event Details Interface"
+              class="img-fluid">
+            <div class="p-3 text-center">
+              <h5 class="fw-bold text-dark mb-1">02. Instant Event Card</h5>
+              <small class="text-muted">A clean, shareable invitation ready for group chats</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="placeholder-frame">
+            <img src="https://placehold.co/600x400/f3f3f3/710214?text=03+Live+RSVP+Tracking" alt="Live RSVP Collection"
+              class="img-fluid">
+            <div class="p-3 text-center">
+              <h5 class="fw-bold text-dark mb-1">03. Real-Time RSVPs</h5>
+              <small class="text-muted">One-tap guest confirmations with instant headcount totals</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 06. KEY BENEFITS -->
+  <!-- ========================================================================= -->
+  <section id="benefits" class="page-section"
+    style="background-color: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="row justify-content-center text-center mb-5">
+        <div class="col-lg-8">
+          <h2 class="display-5 fw-bold text-dark mb-3">
+            Designed around simplicity.
+          </h2>
+          <p class="lead text-muted mb-0">
+            Engineered to remove clutter, reduce friction, and make gathering people feel completely natural.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4 Benefits Grid (2x2) -->
+      <div class="row g-4">
+        <!-- Benefit 1 -->
+        <div class="col-md-6">
+          <div class="benefit-item">
+            <div class="d-flex align-items-start gap-3">
+              <div class="fs-2 text-danger" style="color: var(--brand-primary) !important;">
+                <i class="bi bi-app"></i>
+              </div>
+              <div>
+                <h3 class="h4 fw-bold text-dark mb-2">No New App</h3>
+                <p class="text-muted mb-0">
+                  Everything happens through WhatsApp. No app store downloads, no forgotten passwords, and no new accounts for anyone.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="col-md-6">
+          <div class="benefit-item">
+            <div class="d-flex align-items-start gap-3">
+              <div class="fs-2 text-danger" style="color: var(--brand-primary) !important;">
+                <i class="bi bi-hand-thumbs-up"></i>
+              </div>
+              <div>
+                <h3 class="h4 fw-bold text-dark mb-2">Easy to Use</h3>
+                <p class="text-muted mb-0">
+                  A guided, human-first experience makes every action intuitive — from setting up dates to tracking who’s arriving.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="col-md-6">
+          <div class="benefit-item">
+            <div class="d-flex align-items-start gap-3">
+              <div class="fs-2 text-danger" style="color: var(--brand-primary) !important;">
+                <i class="bi bi-lightning-charge"></i>
+              </div>
+              <div>
+                <h3 class="h4 fw-bold text-dark mb-2">Quick to Set Up</h3>
+                <p class="text-muted mb-0">
+                  Create and share your event in less time than it takes to brew coffee. No waiting, no bloated interfaces, just results.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Benefit 4 -->
+        <div class="col-md-6">
+          <div class="benefit-item">
+            <div class="d-flex align-items-start gap-3">
+              <div class="fs-2 text-danger" style="color: var(--brand-primary) !important;">
+                <i class="bi bi-people"></i>
+              </div>
+              <div>
+                <h3 class="h4 fw-bold text-dark mb-2">Accessible to Everyone</h3>
+                <p class="text-muted mb-0">
+                  Because it lives on WhatsApp, guests of every generation can view invites and confirm their RSVP immediately with zero confusion.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 07. FEATURE HIGHLIGHT / STATEMENT SECTION -->
+  <!-- ========================================================================= -->
+  <section id="statement" class="statement-section text-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-9">
+          <h2 class="statement-title mb-4">
+            Less planning. More connecting.
+          </h2>
+          <p class="statement-text">
+            8tivity takes the complexity out of event management, so you can focus on what truly matters — being together with the people you care about.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 08. FINAL CTA -->
+  <!-- ========================================================================= -->
+  <section id="final-cta" class="page-section bg-white text-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+          <h2 class="display-4 fw-bold text-dark mb-3">
+            Ready to make your next event simpler?
+          </h2>
+          <p class="fs-4 text-muted mb-4">
+            Start a conversation with 8tivity on WhatsApp today.
+          </p>
+
+          <!-- Primary Final CTA -->
+          <div class="mb-4">
+            <a href="https://wa.me/?text=Hi%208tivity,%20let's%20start%20my%20event" target="_blank"
+              rel="noopener noreferrer" class="btn btn-brand-primary btn-lg px-5 py-3">
+              <i class="bi bi-whatsapp fs-4"></i> Chat with 8tivity →
+            </a>
+          </div>
+
+          <!-- Small Supporting Text -->
+          <p class="small text-muted mb-0" style="letter-spacing: 0.05em;">
+            Your next event is just a conversation away. No downloads required.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- FOOTER (Seiki Sakei Aesthetic) -->
+  <!-- ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Col 1: Policies -->
+        <div class="col-md-4">
+          <h6>Policies</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+            <li><a href="https://seikisakei.com/policies/privacy-policy">Privacy Policy</a></li>
+            <li><a href="https://seikisakei.com/policies/terms-of-service">Terms of Service</a></li>
+            <li><a href="https://seikisakei.com/policies/refund-policy">Refund Policy</a></li>
+            <li><a href="https://seikisakei.com/policies/shipping-policy">Shipping Policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 2: Contact Us -->
+        <div class="col-md-4">
+          <h6>Contact Us</h6>
+          <p class="mb-1 text-white-50">Phone: <a href="tel:+919004635463" class="text-white">+91 9004635463</a></p>
+          <p class="mb-0 text-white-50">Email: <a href="mailto:contact@seikisakei.com"
+              class="text-white">contact@seikisakei.com</a></p>
+        </div>
+
+        <!-- Col 3: Follow Us -->
+        <div class="col-md-4">
+          <h6>Follow Us</h6>
+          <div class="d-flex align-items-center">
+            <a href="https://facebook.com" class="social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://instagram.com" class="social-btn" aria-label="Instagram"><i
+                class="bi bi-instagram"></i></a>
+            <a href="https://linkedin.com" class="social-btn" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="https://youtube.com" class="social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="https://twitter.com" class="social-btn" aria-label="Twitter / X"><i
+                class="bi bi-twitter-x"></i></a>
+            <a href="https://pinterest.com" class="social-btn" aria-label="Pinterest"><i
+                class="bi bi-pinterest"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="row footer-bottom align-items-center">
+        <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+          © 2026 Seiki Sakei. All rights reserved. Powered by 8tivity.
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <span class="text-white-50">Designed with simplicity and precision.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3.3 JS Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
